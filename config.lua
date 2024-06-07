@@ -32,7 +32,7 @@ local config = {
     storageMaxResistance = 2,
 
     -- Only spread perfect crops (21/31/0)
-    requirePerfect = false,
+    requirePerfect = true,
     -- Perfect Growth value
     perfectGrowth = 21,
     -- Perfect Gain value
