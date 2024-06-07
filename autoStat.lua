@@ -150,9 +150,10 @@ local function init()
     database.resetStorage()
     database.scanFarm()
     action.restockAll()
-    updateLowest()
 
     targetCrop = database.getFarm()[1].name
+    updateLowest()
+
     print(string.format('autoStat: Target %s', targetCrop))
 end
 

@@ -59,11 +59,6 @@ local function checkChild(slot, crop)
             
             -- No parent is empty, put in storage
             elseif (stat >= config.autoSpreadThreshold) and (config.requirePerfect == false or isPerfect(crop) == true) then
-                if isPerfect(crop) then
-                    print("moving perfect crop to storage')
-                else
-                    print("moving imperfect crop to storage')
-                end
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.storageSlotToPos(database.nextStorageSlot()))
                 database.addToStorage(crop)
                 action.placeCropStick(2)
