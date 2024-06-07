@@ -28,7 +28,7 @@ end
 
 local function updateLowest()
     local farm = database.getFarm()
-    lowestStat = 99
+    lowestStat = 99999
     lowestStatSlot = 0
 
     -- Find lowest stat slot
