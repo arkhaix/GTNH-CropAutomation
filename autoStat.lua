@@ -119,8 +119,11 @@ local function statOnce()
         end
 
         -- Terminal Condition
-        if lowestStat >= config.autoStatThreshold then
+        if (config.requirePerfect == false) and lowestStat >= config.autoStatThreshold then
             print('autoStat: Minimum Stat Threshold Reached!')
+            return false
+        elseif (config.requirePerfect == true) and (lowestStat >= 9000) then
+            print('autoStat: Perfect Stats Reached!')
             return false
         end
 
