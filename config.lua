@@ -31,6 +31,15 @@ local config = {
     -- Maximum Resistance for crops on the storage farm
     storageMaxResistance = 2,
 
+    -- Only spread perfect crops (21/31/0)
+    requirePerfect = false,
+    -- Perfect Growth value
+    perfectGrowth = 21,
+    -- Perfect Gain value
+    perfectGain = 31,
+    -- Perfect Resistance value
+    perfectResistance = 0,
+
     -- Minimum Charge Level
     needChargeLevel = 0.2,
     -- Max breed round before termination of autoTier.

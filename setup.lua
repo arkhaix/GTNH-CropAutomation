@@ -20,14 +20,14 @@ local scripts = {
 if #args >= 1 then
     branch = args[1]
 else
-    branch = 'main'
+    branch = 'require-perfect'
 end
 
 -- REPO
 if #args >= 2 then
     repo = args[2]
 else
-    repo = 'https://raw.githubusercontent.com/DylanTaylor1/GTNH-CropAutomation/'
+    repo = 'https://raw.githubusercontent.com/arkhaix/GTNH-CropAutomation/'
 end
 
 -- INSTALL

@@ -10,6 +10,22 @@ local targetCrop
 
 -- =================== MINOR FUNCTIONS ======================
 
+local function isPerfect(crop)
+    if crop.gr == config.perfectGrowth and crop.ga == config.perfectGain and crop.re == config.perfectResistance then
+        return true
+    end
+
+    return false
+end
+
+local function getStat(crop)
+    local stat = crop.gr + crop.ga - crop.re
+    if isPerfect(crop) == true then
+        stat = 9999
+    end
+    return stat
+end
+
 local function updateLowest()
     local farm = database.getFarm()
     lowestStat = 99
@@ -26,14 +42,14 @@ local function updateLowest()
                 break
 
             elseif crop.name ~= targetCrop then
-                local stat = crop.gr + crop.ga - crop.re - 2
+                local stat = getStat(crop) - 2
                 if stat < lowestStat then
                     lowestStat = stat
                     lowestStatSlot = slot
                 end
 
             else
-                local stat = crop.gr + crop.ga - crop.re
+                local stat = getStat(crop)
                 if stat < lowestStat then
                     lowestStat = stat
                     lowestStatSlot = slot
@@ -55,7 +71,7 @@ local function checkChild(slot, crop)
             action.placeCropStick()
 
         elseif crop.name == targetCrop then
-            local stat = crop.gr + crop.ga - crop.re
+            local stat = getStat(crop)
 
             if stat > lowestStat then
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.workingSlotToPos(lowestStatSlot))

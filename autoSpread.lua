@@ -9,6 +9,21 @@ local targetCrop
 
 -- =================== MINOR FUNCTIONS ======================
 
+local function isPerfect(crop)
+    if crop.gr == config.perfectGrowth and crop.ga == config.perfectGain and crop.re == config.perfectResistance then
+        return true
+    end
+    return false
+end
+
+local function getStat(crop)
+    local stat = crop.gr + crop.ga - crop.re
+    if isPerfect(crop) == true then
+        stat = 9999
+    end
+    return stat
+end
+
 local function findEmpty()
     local farm = database.getFarm()
 
@@ -34,7 +49,7 @@ local function checkChild(slot, crop)
             action.placeCropStick()
 
         elseif crop.name == targetCrop then
-            local stat = crop.gr + crop.ga - crop.re
+            local stat = getStat(crop)
 
             -- Make sure no parent on the working farm is empty
             if stat >= config.autoStatThreshold and findEmpty() and crop.gr <= config.workingMaxGrowth and crop.re <= config.workingMaxResistance then
@@ -43,7 +58,7 @@ local function checkChild(slot, crop)
                 database.updateFarm(emptySlot, crop)
             
             -- No parent is empty, put in storage
-            elseif stat >= config.autoSpreadThreshold then
+            elseif (stat >= config.autoSpreadThreshold) and (config.requirePerfect == false or isPerfect(crop) == true) then
                 action.transplant(posUtil.workingSlotToPos(slot), posUtil.storageSlotToPos(database.nextStorageSlot()))
                 database.addToStorage(crop)
                 action.placeCropStick(2)
